@@ -20,44 +20,27 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>シンプルTODOアプリ</title>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
 
-			<?php echo $this->Session->flash(); ?>
+    <!-- ① js(library) -->
+    <script src="js/lib/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="js/lib/underscore-min.js" type="text/javascript"></script>
+    <script src="js/lib/backbone-min.js" type="text/javascript"></script>
 
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
+    <!-- js(application) -->
+   <!--   model   -->
+   <script src="js/models/todo-model.js" type="text/javascript"></script>
+   <!--   collection   -->
+   <script src="js/collections/todo-collection.js" type="text/javascript"></script>
+   <!--   view   -->
+   <script src="js/views/todo-collection-view.js" type="text/javascript"></script>
+    <!--  ② router   -->
+    <script src="js/routers/router.js" type="text/javascript"></script>
+    <!--  ③ entry point   -->
+    <script src="js/app.js" type="text/javascript"></script>
+
 </body>
 </html>
