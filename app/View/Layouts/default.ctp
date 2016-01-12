@@ -25,8 +25,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <body>
 <!-- コンテンツ -->
-   <div id="content">
-   </div>
+<div id="main"></div>
    <!-- TODO一覧表示のテンプレート -->
    <script type="text/template" id="list-template">
    <h1>TODOリスト</h1>
@@ -42,9 +41,23 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
    <!-- TODO一行分のテンプレート（上のtbody部分に挿入される） -->
    <script type="text/template" id="item-template">
-   <td style="margin:0px">
+<td><input type="checkbox" class="toggle" <%- status === '1' ? 'checked' : '' %>></td> 
+  <td style="margin:0px">
        <span class="todo-edit" style="margin:0px"><%- todo %></span>
    </td>
+   <td>
+       <a class="remove-link" href="#">削除</a>
+	<a class="detail-link" href="#todo-lists/<%- id %>">詳細</a>  
+ </td>
+   </script>
+   <!-- 詳細画面 -->
+   <script type="text/template" id="detail-template">
+   <h2>Todo #<%- id %></h2>
+   <div>
+   <textarea style="width:300px;height:50px" id="edit-todo" autofocus placeholder="Todo?"><%- todo %></textarea>
+<input type="button" id="updateTodo" value="更新"></input>
+   <input type="button" id="updateCancel" value="キャンセル"></input>
+   </div>
    </script>
 
     <!-- ① js(library) -->
@@ -59,6 +72,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
    <script src="js/collections/todo-collection.js" type="text/javascript"></script>
    <!--   view   -->
    <script src="js/views/todo-item-view.js" type="text/javascript"></script>
+<script src="js/views/todo-detail-view.js" type="text/javascript"></script>
    <script src="js/views/todo-collection-view.js" type="text/javascript"></script>
     <!--  ② router   -->
     <script src="js/routers/router.js" type="text/javascript"></script>
