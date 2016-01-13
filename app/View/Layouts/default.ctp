@@ -71,31 +71,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
    </div>
    </script>
 
-    <!-- ① js(library) -->
-    <script src="js/lib/jquery-2.1.3.min.js" type="text/javascript"></script>
-    <script src="js/lib/underscore-min.js" type="text/javascript"></script>
-    <script src="js/lib/backbone-min.js" type="text/javascript"></script>
-    <script src="js/lib/backbone.marionette.min.js" type="text/javascript"></script>
-   
-   <!-- js(application) -->
-   <!--   model   -->
-   <script src="js/models/todo-model.js" type="text/javascript"></script>
-   <!--   collection   -->
-   <script src="js/collections/todo-collection.js" type="text/javascript"></script>
-   <!--   view   -->
-   <script src="js/views/todo-item-view.js" type="text/javascript"></script>
-   <script src="js/views/todo-detail-item-view.js" type="text/javascript"></script>
-   <script src="js/views/todo-detail-layout-view.js" type="text/javascript"></script>  
- <script src="js/views/todo-composite-view.js" type="text/javascript"></script>
-   <script src="js/views/todo-layout-view.js" type="text/javascript"></script>
-	<!--   controller   -->
-       <script src="js/routers/controller.js" type="text/javascript"></script>
-    <!--  ② router   -->
-    <script src="js/routers/router.js" type="text/javascript"></script>
-    <!--   application   -->
-    <script src="js/app.js" type="text/javascript"></script>
-    <!--   entry point   -->
-    <script src="js/main.js" type="text/javascript"></script>
-
+   <!-- require -->
+   <script type="text/javascript" src="js/require-config.js"></script>
+   <script type="text/javascript" src="js/lib/require.js" data-main="main.js"></script>
 </body>
 </html>
