@@ -1,9 +1,6 @@
-var app = app || {};
-
 //詳細ビュー
-(function(app) {
-    app.TodoDetailItemView = Backbone.Marionette.ItemView.extend({
-
+define(function() {
+ 	var TodoDetailItemView = Marionette.ItemView.extend({
         //テンプレート
         template: "#todo-detail-item-template",
 
@@ -54,4 +51,7 @@ var app = app || {};
         }
 
     });
-})(app);
+
+	return TodoDetailItemView;
+}); 
+
