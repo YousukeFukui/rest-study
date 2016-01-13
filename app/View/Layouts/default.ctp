@@ -55,8 +55,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<a class="detail-link" href="#todo-lists/<%- id %>">詳細</a>  
  </td>
    </script>
-   <!-- 詳細画面 -->
-   <script type="text/template" id="detail-template">
+   <!-- 詳細画面のレイアウトテンプレート -->
+   <script type="text/template" id="todo-detail-layout-template">
+   <div id="todo-item"></div>
+   </script>
+
+   <!-- 詳細画面の表示内容テンプレート -->
+   <script type="text/template" id="todo-detail-item-template">
+
    <h2>Todo #<%- id %></h2>
    <div>
    <textarea style="width:300px;height:50px" id="edit-todo" autofocus placeholder="Todo?"><%- todo %></textarea>
@@ -78,8 +84,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
    <script src="js/collections/todo-collection.js" type="text/javascript"></script>
    <!--   view   -->
    <script src="js/views/todo-item-view.js" type="text/javascript"></script>
-   <script src="js/views/todo-detail-view.js" type="text/javascript"></script>
-   <script src="js/views/todo-composite-view.js" type="text/javascript"></script>
+   <script src="js/views/todo-detail-item-view.js" type="text/javascript"></script>
+   <script src="js/views/todo-detail-layout-view.js" type="text/javascript"></script>  
+ <script src="js/views/todo-composite-view.js" type="text/javascript"></script>
    <script src="js/views/todo-layout-view.js" type="text/javascript"></script>
 	<!--   controller   -->
        <script src="js/routers/controller.js" type="text/javascript"></script>

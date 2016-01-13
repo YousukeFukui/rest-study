@@ -10,7 +10,7 @@ var app = app || {};
         },
 
         todoDetail : function(id) {
-            this.nextView(app.TodoDetailView, id);
+        this.nextView(app.TodoDetailLayoutView, {modelId : id});
         },
 
         nextView : function(View, option) {
