@@ -24,8 +24,18 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <title>シンプルTODOアプリ</title>
 </head>
 <body>
+   <!-- ヘッダ -->
+   <div id="header"></div>
 <!-- コンテンツ -->
 <div id="main"></div>
+
+   
+   <!-- ヘッダのテンプレート -->
+   <script type="text/template" id="header-template">
+   <p>ユーザ：<%- username %>（<%- name %>）　<input type="button" id="logout" value="ログアウト"></input></p>
+   <hr>
+   </script>
+
    <!-- TODO一覧表示のレイアウトテンプレート -->
    <script type="text/template" id="todo-layout-template">
     <h1>TODOリスト</h1>
@@ -68,6 +78,24 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
    <textarea style="width:300px;height:50px" id="edit-todo" autofocus placeholder="Todo?"><%- todo %></textarea>
 <input type="button" id="updateTodo" value="更新"></input>
    <input type="button" id="updateCancel" value="キャンセル"></input>
+   </div>
+   </script>
+
+   <!-- ログイン画面テンプレート -->
+   <script type="text/template" id="login-layout-template">
+   <h2>ログイン</h2>
+   <div>
+   <p>ユーザ名　：<input type="text" id="username" placeholder="username" autofocus></input></p>
+   <p>パスワード：<input type="password" id="password" placeholder="password"></input></p>
+   <input type="button" id="login" value="ログイン"></input>
+   </div>
+   <hr>
+   <h2>ユーザ登録</h2>
+   <div>
+   <p>ユーザ名　：<input type="text" id="signup-username" placeholder="username"></input></p>
+   <p>氏名　　　：<input type="text" id="signup-name" placeholder="name"></input></p>
+   <p>パスワード：<input type="password" id="signup-password" placeholder="password"></input></p>
+   <input type="button" id="signup" value="登録"></input>
    </div>
    </script>
 

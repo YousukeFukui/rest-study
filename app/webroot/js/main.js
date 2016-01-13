@@ -8,7 +8,5 @@ function(){
     require(['app'], function(Application){
         console.log('run main2');
         window.application = new Application();
-        window.application.start();
-        console.log('app start');
     });
 });
