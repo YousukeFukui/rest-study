@@ -24,7 +24,8 @@ define(function() {
 		initialize: function(options){
 			_.bindAll( this, 'onSaveSuccess' );
 			this.userList = options.userList;
-		},
+ 			this.listenTo(this.model, 'invalid', this.renderErrorMessage);	
+	},
 
 		onRender : function() {
 			//ユーザ一覧を表示
@@ -48,10 +49,11 @@ define(function() {
 			//テキストボックスから文字を取得
 			var todoString = this.ui.todoStatus.val();  // Todo
 			var assigneeId = this.ui.userList.val();	// 担当者
-			this.model.save({
+			this.model.set({
 				todo : todoString,
 				assignee : assigneeId
-			}, {
+			});
+		           this.model.save(null,{
 				silent : true,
 				success : this.onSaveSuccess,
 			});
@@ -69,7 +71,17 @@ define(function() {
 
 		//TODOリスト画面に戻る
 		backTodoLists : function() {
-			Backbone.history.navigate('#todo-lists', true);
+			Backbone.history.navigate('#todo-lists', true);i
+
+       },
+       
+       //エラー表示
+       renderErrorMessage : function(errors){
+           var message = '';
+           for(var key in errors.validationError){
+               message += errors.validationError[key];
+           }
+           alert(message);
 		}
 
 	});

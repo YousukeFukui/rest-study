@@ -1,6 +1,7 @@
 //Todo一覧表示用ビュー
 define(function(require) {
 	var TodoItemView = require('views/todo-item-view');
+	var TodoModel = require('models/todo-model');
 
 	var TodoCompositeView = Marionette.CompositeView.extend({
 		template: '#todo-composite-template',
@@ -8,6 +9,8 @@ define(function(require) {
 		childView : TodoItemView,
 
 		childViewContainer : 'tbody',
+
+ 		newTodoModel : new TodoModel(),
 
 		ui : {
 			addTodo : '#addTodo',
@@ -22,6 +25,7 @@ define(function(require) {
 		initialize: function(options){
 			_.bindAll( this, 'onCreatedSuccess' );
 			this.userList = options.userList;
+			this.listenTo(this.newTodoModel, 'invalid', this.renderErrorMessage);
 		},
 
 		onRender : function() {
@@ -42,8 +46,10 @@ define(function(require) {
 		},
 			
 		onCreateTodo : function() {
-			this.collection.create(this.newAttributes(), {
-		          silent:  true ,
+		   this.newTodoModel.clear({silent : true});
+	           this.newTodoModel.set(this.newAttributes());
+	           this.collection.create(this.newTodoModel, {  
+			silent:  true ,
 		          success: this.onCreatedSuccess
 			});
 			this.ui.newTodo.val('');
@@ -60,7 +66,14 @@ define(function(require) {
 		onCreatedSuccess : function(){
 			this.collection.fetch({ reset : true });
 		},
-
+       //エラー表示
+       renderErrorMessage : function(errors){
+           var message = '';
+           for(var key in errors.validationError){
+               message += errors.validationError[key];
+           }
+           alert(message);
+       }
 	});
 	return TodoCompositeView;
 });
