@@ -88,4 +88,4 @@ define(function(require){
 
 	});
 	return Application;
-);
+});
