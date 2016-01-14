@@ -4,41 +4,38 @@ define(function(require) {
     var TodoModel = require('models/todo-model');
     var UserCollection = require('collections/user-collection');
 
-	var TodoDetailLayoutView = Marionette.LayoutView.extend({
-		//テンプレート
-		template : '#todo-detail-layout-template',
+    var TodoDetailLayoutView = Marionette.LayoutView.extend({
+        //テンプレート
+        template : '#todo-detail-layout-template',
 
-		regions : {
-			itemRegion : '#todo-item',
-		},
+        regions : {
+            itemRegion : '#todo-item',
+        },
 
-		onRender : function() {
-			this.userCollection = new UserCollection();
-			this.listenToOnce(this.userCollection, 'reset', this.onLoadUsers, this);
-			this.userCollection.fetch({
-				reset : true
-			});
-		},
+        onRender: function () {
+            //Todoを取得
+            this.todoModel = new TodoModel({
+                id : this.options.modelId
+            });
+            var todoFetching = this.todoModel.fetch();
+            //ユーザ一覧取得
+            var userCollection = new UserCollection();
+            var userFetching = userCollection.fetch();
+            $.when(
+                todoFetching,
+                userFetching
+            ).done(function(){
+                this.showItem(this.todoModel, userCollection);
+            }.bind(this));
+        },
 
-		onLoadUsers : function(userCollection){
- 			var todoModel = new TodoModel({
- 				id : this.options.modelId
- 			});
- 			//モデルのサーバからのデータ取得完了時、描画を行う
-			this.listenToOnce(todoModel, 'sync', this.showItem, this);
- 			//サーバからデータ取得
- 			todoModel.fetch({
- 				wait : true
- 			});
- 		},
+        showItem: function (todoModel, userCollection) {
+            this.itemRegion.show(new TodoDetailItemView({
+                model : todoModel,
+                userList : userCollection.models
+            }));
+        },
 
- 		showItem : function(todoModel) {
- 			this.itemRegion.show(new TodoDetailItemView({
- 				model : todoModel,
- 				userList : this.userCollection.models
- 			}));
- 		},
-
-	});
-	return TodoDetailLayoutView;
+    });
+    return TodoDetailLayoutView;
 });
